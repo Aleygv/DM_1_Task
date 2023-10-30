@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -12,11 +14,12 @@ public class InsertionSort {
         try {
             // Чтение входного файла
             List<Integer> numbers = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader("input.txt"));
+            Path pathInput = Paths.get("C:\\Java projects\\DM_1_Task\\src\\SortTask\\inputInsertionSort.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(pathInput.toFile()));
             String line = reader.readLine();
-            while (line != null) {
-                numbers.add(Integer.parseInt(line));
-                line = reader.readLine();
+            String[] words = line.split(" ");
+            for (String word : words) {
+                numbers.add(Integer.parseInt(word));
             }
             reader.close();
 
@@ -24,7 +27,7 @@ public class InsertionSort {
             int comparisons = insertionSort(numbers);
 
             // Запись отсортированного массива в выходной файл
-            FileWriter writer = new FileWriter("output.txt");
+            FileWriter writer = new FileWriter("C:\\Java projects\\DM_1_Task\\src\\SortTask\\outputInsertionSort.txt");
             for (int num : numbers) {
                 writer.write(String.valueOf(num));
                 writer.write("\n");
